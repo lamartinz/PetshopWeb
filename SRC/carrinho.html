@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Carrinho - Cãopanheiros PetStore</title>
+</head>
+<script src="js/script.js"></script>
+<body>
+  <header>
+    <h1>Cãopanheiros PetStore</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="produtos.html">Produtos</a>
+      <a href="carrinho.html">Carrinho</a>
+      <a href="sobre.html">Sobre</a>
+      <a href="contato.html">Contato</a>
+      <a href="favoritos.html">Favoritos</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Seu Carrinho</h2>
+    <ul id="lista-carrinho"></ul>
+    <p id="total"></p>
+  </main>
+
+  <footer>
+    <p>© 2025 Cãopanheiros PetStore LTDA</p>
+  </footer>
+
+  <script>
+    let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+
+    function exibirCarrinho() {
+      let lista = document.getElementById("lista-carrinho");
+      let total = document.getElementById("total");
+      lista.innerHTML = "";
+      let soma = 0;
+
+      carrinho.forEach((item, i) => {
+        let li = document.createElement("li");
+        li.textContent = item.nome + " - R$ " + item.preco.toFixed(2);
+        lista.appendChild(li);
+        soma += item.preco;
+      });
+
+      total.textContent = "Total: R$ " + soma.toFixed(2);
+    }
+
+    exibirCarrinho();
+  </script>
+</body>
+</html>
