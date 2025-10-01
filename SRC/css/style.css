@@ -3,6 +3,10 @@ body{
   background-color: #FFFFFF;
   color: #333;
   line-height: 1.6;
+  min-height: 100vh; 
+  display: flex; 
+  flex-direction: column; 
+  margin: 0;
 }
 
 header{
@@ -48,8 +52,16 @@ button:hover, .btn:hover{
 }
 
 main{
+  flex: 1;
   padding: 30px 20px;
   text-align: center;
+}
+
+.mascote {
+  width: 200px;
+  max-width: 30%;
+  display: block;
+  margin: 20px auto;
 }
 
 .card{
@@ -135,3 +147,4 @@ footer{
   border-radius: 6px;
   margin-bottom: 10px;
 }
+

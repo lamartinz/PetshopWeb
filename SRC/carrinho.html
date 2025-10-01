@@ -31,8 +31,7 @@
   </footer>
 
   <script>
-    let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-
+    
     function exibirCarrinho() {
       let lista = document.getElementById("lista-carrinho");
       let total = document.getElementById("total");
@@ -41,9 +40,10 @@
 
       carrinho.forEach((item, i) => {
         let li = document.createElement("li");
-        li.textContent = item.nome + " - R$ " + item.preco.toFixed(2);
+        const subtotal = item.preco * item.quantidade; 
+        li.textContent = item.nome + " (x" + item.quantidade + ")" +  " - R$ " + subtotal.toFixed(2);               
         lista.appendChild(li);
-        soma += item.preco;
+        soma += subtotal;
       });
 
       total.textContent = "Total: R$ " + soma.toFixed(2);
