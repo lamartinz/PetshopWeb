@@ -1,38 +1,9 @@
 const lista_de_produtos = [
-    {
-        id: 1,
-        nome: "Ração Premium Dog",
-        preco: 120.00,
-        imagem: "img1.jpg" 
-    },
-
-    {
-        id: 2,
-        nome: "Mordedor para Cachorro",
-        preco: 35.00,
-        imagem: "img2.jpg"
-    },
-    
-    {
-        id: 3,
-        nome: "Guia e Coleira",
-        preco: 60.00,
-        imagem: "img3.jpg"
-    },
-
-    {
-        id: 4,
-        nome: "Petisco Natural",
-        preco: 25.00,
-        imagem: "img4.jpg"
-    },
-
-    {
-        id: 5,
-        nome: "Cama Confort",
-        preco: 150.00,
-        imagem: "img5.png"
-    }
+  { id: 1, nome: "Ração Premium Dog", preco: 120.00, imagem: "IMAGES/img.jpg" },
+  { id: 2, nome: "Mordedor para Cachorro", preco: 35.00, imagem: "IMAGES/img2.jpg.jpg" },
+  { id: 3, nome: "Guia e Coleira", preco: 60.00, imagem: "IMAGES/img3.jpg.jpg" },
+  { id: 4, nome: "Petisco Natural", preco: 25.00, imagem: "IMAGES/img4.jpg.jpg" },
+  { id: 5, nome: "Cama Confort", preco: 150.00, imagem: "IMAGES/img5.jpg.jpg" },
 ];
 
 let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];

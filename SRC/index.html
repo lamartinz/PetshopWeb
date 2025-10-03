@@ -10,26 +10,64 @@
     <header>
         <h1>Cãopanheiros PetStore</h1>
         <nav>
-            <a href="index.html">Home</a>
+            <a href="index.html">Inicio</a>
             <a href="produtos.html">Produtos</a>
             <a href="carrinho.html">Carrinho</a>
             <a href="sobre.html">Sobre</a>
             <a href="contato.html">Contato</a>
             <a href="favoritos.html">Favoritos</a>
+            <a href="login.html">Login</a>
+            <a href="cadastro.html">Cadastro</a>
 
         </nav>
     </header>
 
     <main>
-        <div class="pet-hero-section">
-            <h2>Onde seu pet encontra um aumigo de verdade!</h2>
-            <p>Cuidado, carinho e tudo que seu melhor amigo precisa em um só lugar.</p>
-            <div class="pet-images-container">
-                <img src="IMAGES/img6.png" alt="Mascote" class="mascote">
-            </div>
-            <button onclick="alert('Promoção: frete gratis para Fortaleza!')">Promoção da semana</button> 
+
+    <div class="pet-hero-section">
+        <h2>Onde seu pet encontra um aumigo de verdade!</h2>
+        <p>Cuidado, carinho e tudo que seu melhor amigo precisa em um só lugar.</p>
+        <div class="pet-images-container">
+            <img src="IMAGES/img6.png" alt="Mascote" class="mascote">
         </div>
-    </main>
+        <button onclick="window.location.href='produtos.html'" class="btn">Ver Produtos</button>
+    </div>
+
+    <section class="destaques">
+        <h2>Produtos em destaque 🐾</h2>
+        <div class="produtos-container">
+            <div class="card">
+                <img src="IMAGES/img.jpg" alt="Ração Premium Dog">
+                <h3>Ração Premium Dog</h3>
+                <p>R$ 120,00</p>
+                <a href="produtos.html" class="btn">Comprar</a>
+            </div>
+            <div class="card">
+                <img src="IMAGES/img2.jpg.jpg" alt="Mordedor para cachorro">
+                <h3>Mordedor</h3>
+                <p>R$ 35,00</p>
+                <a href="produtos.html" class="btn">Comprar</a>
+            </div>
+            <div class="card">
+                <img src="IMAGES/img5.jpg.jpg" alt="Cama Confort">
+                <h3>Cama Confort</h3>
+                <p>R$ 150,00</p>
+                <a href="produtos.html" class="btn">Comprar</a>
+            </div>
+        </div>
+        <a href="produtos.html" class="btn">Ver todos os produtos</a>
+    </section>
+
+    <section class="beneficios">
+        <h2>Por que escolher a Cãopanheiros?</h2>
+        <div class="beneficios-container">
+            <div class="beneficio">🚚 Frete grátis em Fortaleza</div>
+            <div class="beneficio">🐾 Produtos Premium</div>
+            <div class="beneficio">❤️ Amor e cuidado para o seu pet</div>
+        </div>
+    </section>
+</main>
+
     
     <footer>
         <p>© 2025 Cãopanheiros PetStore LTDA</p>

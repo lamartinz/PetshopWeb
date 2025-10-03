@@ -6,47 +6,96 @@
   <link rel="stylesheet" href="css/style.css">
   <title>Carrinho - Cãopanheiros PetStore</title>
 </head>
-<script src="js/script.js"></script>
 <body>
   <header>
     <h1>Cãopanheiros PetStore</h1>
     <nav>
-      <a href="index.html">Home</a>
+      <a href="index.html">Inicio</a>
       <a href="produtos.html">Produtos</a>
       <a href="carrinho.html">Carrinho</a>
       <a href="sobre.html">Sobre</a>
       <a href="contato.html">Contato</a>
       <a href="favoritos.html">Favoritos</a>
+      <a href="login.html">Login</a>
+      <a href="cadastro.html">Cadastro</a>
+
     </nav>
   </header>
 
   <main>
     <h2>Seu Carrinho</h2>
-    <ul id="lista-carrinho"></ul>
+    <div id="lista-carrinho" class="carrinho-container"></div>
     <p id="total"></p>
+    <button onclick="finalizarCompra()">Finalizar Compra</button>
   </main>
 
   <footer>
     <p>© 2025 Cãopanheiros PetStore LTDA</p>
   </footer>
 
+  <script src="js/script.js"></script>
   <script>
-    
     function exibirCarrinho() {
-      let lista = document.getElementById("lista-carrinho");
+      let container = document.getElementById("lista-carrinho");
       let total = document.getElementById("total");
-      lista.innerHTML = "";
+      container.innerHTML = "";
       let soma = 0;
 
       carrinho.forEach((item, i) => {
-        let li = document.createElement("li");
-        const subtotal = item.preco * item.quantidade; 
-        li.textContent = item.nome + " (x" + item.quantidade + ")" +  " - R$ " + subtotal.toFixed(2);               
-        lista.appendChild(li);
+        const subtotal = item.preco * item.quantidade;
+
+        let div = document.createElement("div");
+        div.classList.add("item-carrinho");
+
+        div.innerHTML = `
+          <img src="${item.imagem}" alt="${item.nome}" class="img-carrinho">
+          <div class="info-carrinho">
+            <h3>${item.nome}</h3>
+            <p>Preço: R$ ${item.preco.toFixed(2)}</p>
+            <p>Subtotal: R$ ${subtotal.toFixed(2)}</p>
+            <div class="controles">
+              <button onclick="alterarQuantidade(${item.id}, -1)">➖</button>
+              <span>${item.quantidade}</span>
+              <button onclick="alterarQuantidade(${item.id}, 1)">➕</button>
+              <button class="remover" onclick="removerItem(${item.id})">❌ Remover</button>
+            </div>
+          </div>
+        `;
+
+        container.appendChild(div);
         soma += subtotal;
       });
 
       total.textContent = "Total: R$ " + soma.toFixed(2);
+    }
+
+    function alterarQuantidade(id, delta) {
+      let item = carrinho.find(p => p.id === id);
+      if (!item) return;
+
+      item.quantidade += delta;
+      if (item.quantidade <= 0) {
+        carrinho = carrinho.filter(p => p.id !== id);
+      }
+      localStorage.setItem("carrinho", JSON.stringify(carrinho));
+      exibirCarrinho();
+    }
+
+    function removerItem(id) {
+      carrinho = carrinho.filter(p => p.id !== id);
+      localStorage.setItem("carrinho", JSON.stringify(carrinho));
+      exibirCarrinho();
+    }
+
+    function finalizarCompra() {
+      if (carrinho.length === 0) {
+        alert("Seu carrinho está vazio!");
+        return;
+      }
+      alert("Compra finalizada com sucesso!");
+      localStorage.removeItem("carrinho");
+      carrinho = [];
+      exibirCarrinho();
     }
 
     exibirCarrinho();
