@@ -245,7 +245,7 @@ footer{
   min-height: 75vh;
 }
 
-.login-container{
+.cadastro-container{
   display: flex; 
   width: 100%;
   max-width:800px;
@@ -314,7 +314,7 @@ footer{
 
 
 @media(max-width: 768px){
-  .login-container{
+  .cadastro-container{
     flex-direction: column;
     max-width: 500px;
   }
@@ -328,4 +328,44 @@ footer{
   }
 }
 
+/* tela de login */
+.login-layout{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 75vh;
+}
+
+.login-container{
+  width: 100%;
+  max-width: 550px;
+  padding: 35px;
+  background-color: #F2C94C;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+.login-container h2{
+  width: 100%;
+  text-align: center;
+  font-family: "Baloo 2", "Fredoka One", cursive;
+  color: #A66E4A;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.login-container form{
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0; 
+  width: 100%;
+  margin: 0 auto;
+  display: block;
+}
+
+.login-container p{
+  text-align: center;
+  margin-top: 17px; 
+}
 
