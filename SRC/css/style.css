@@ -236,3 +236,96 @@ footer{
 .controles button.remover:hover {
   background: #C0392B;
 }
+
+/* tela de cadastro */
+.cadastro-layout{
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  min-height: 75vh;
+}
+
+.login-container{
+  display: flex; 
+  width: 100%;
+  max-width:800px;
+  background-color: #FFFFFF; 
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  overflow: hidden; 
+  text-align: left;
+}
+
+.BemVindo{
+  flex: 1; 
+  background-color: #F2C94C; 
+  color: #A66E4A; 
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.BemVindo h2{
+  font-family: "Baloo 2", "Fredoka One", cursive; 
+  font-size: 2em;
+  margin-bottom: 15px;
+  color: #A66E4A;
+}
+
+.BemVindo p{
+  font-size: 1em;
+  margin-bottom: 30px;
+  color: #A66E4A;
+}
+
+.BemVindo .btn{
+  width: 80%; 
+  text-align: center;
+  padding: 12px 0;
+  margin-top: 10px;
+  align-self: center; 
+}
+
+
+.form-side{
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #f8f8f8;
+}
+
+.form-side h2{
+  font-family: "Baloo 2", "Fredoka One", cursive;
+  color: #A66E4A;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.form-side form{
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  background-color: transparent; 
+}
+
+
+@media(max-width: 768px){
+  .login-container{
+    flex-direction: column;
+    max-width: 500px;
+  }
+  .BemVindo{
+    padding: 30px;
+    text-align: center;
+    align-items: center;   
+  }
+  .BemVindo .btn{
+    width: 100%;
+  }
+}
+
+

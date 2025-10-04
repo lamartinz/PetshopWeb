@@ -15,16 +15,25 @@
   </header>
 
   <main>
-    <div class="login-container">
-      <h2>Criar Conta</h2>
-      <form method="POST" action="backend/registrar.php">
-        <input type="text" name="nome" placeholder="Nome completo" required>
-        <input type="email" name="email" placeholder="E-mail" required>
-        <input type="password" name="senha" placeholder="Senha" required>
-        <button type="submit" class="btn">Cadastrar</button>
-      </form>
-      <p>Já tem conta? <a href="login.html">Faça login</a></p>
-    </div>
+    <div class="cadastro-layout">
+      <div class="login-container">
+        <div class="BemVindo">
+          <h2>Bem-vindo(a) à Cãopanheiros!</h2>
+          <p>Faça seu cadastro e tenha acesso aos seus favoritos.</p>
+          <a href="login.html" class="btn">Já tenho conta</a>
+        </div>
+        <div class="form-side">
+          <h2>Criar Conta</h2>
+          <form method="POST" action="backend/registrar.php">
+            <input type="text" name="nome" placeholder="Nome Completo" required>
+            <input type="email" name="email" placeholder="E-mail" required>
+            <input type="password" name="senha" placeholder="Senha" required>
+            <button type="submit" class="btn">Cadastrar</button>
+          </form>
+          <p>Já tem conta? <a href="login.html">Faça login</a></p>
+        </div>
+      </div>
+    </div> 
   </main>
 
   <footer>
