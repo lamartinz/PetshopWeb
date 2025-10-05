@@ -133,11 +133,15 @@ footer{
   font-family: 'Poppins', 'Nunito', sans-serif;
 }
 
-.produtos-container {
+.produtos-container { /*CSS do bloco dos produtos*/
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   padding: 20px 0;
+  box-shadow: 0px 2px 6px rgba(0,0,0,0.1);/*Sombra por trás do blooc dos produtos*/
+  background: #e7e7e7;/*Cor cinza clarinho*/
+  margin: 35px;/*Distanciamento do bloco para borda da página*/
+  border-radius: 10px;/*Borda arredondada*/
 }
 
 .card img{
