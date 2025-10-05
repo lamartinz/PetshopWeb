@@ -269,13 +269,13 @@ footer{
 
 .BemVindo h2{
   font-family: "Baloo 2", "Fredoka One", cursive; 
-  font-size: 2em;
+  font-size: 30px;
   margin-bottom: 15px;
   color: #A66E4A;
 }
 
 .BemVindo p{
-  font-size: 1em;
+  font-size: 16px;
   margin-bottom: 30px;
   color: #A66E4A;
 }
@@ -369,3 +369,67 @@ footer{
   margin-top: 17px; 
 }
 
+/* tela sobre */
+.sobre-layout{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 75vh;
+  padding: 20px;
+}
+
+.info-container{
+  display: flex;
+  width: 100%;
+  max-width: 900px;
+  gap: 30px; /* coloca um espaço de 30px entre as duas caixinhas */
+  background-color: transparent;
+}
+
+.quem-somos-nos{
+  flex: 1;
+  padding: 40px;
+  background-color: #FCE9CE;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  height: auto; 
+}
+
+.nossa-missao{
+  flex: 1;
+  padding: 40px;
+  background-color: #FCE9CE;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  height: auto; 
+}
+
+.quem-somos-nos h2{
+  font-family: "Baloo 2", "Fredoka One", cursive;
+  color: #A66E4A;
+  margin-bottom: 20px;
+  font-size: 25px;
+  text-align: center;
+}
+
+.nossa-missao h2{
+  font-family: "Baloo 2", "Fredoka One", cursive;
+  color: #A66E4A;
+  margin-bottom: 20px;
+  font-size: 25px;
+  text-align: center;
+}
+
+.quem-somos-nos p{
+  font-size: 17px;
+  color: #333;
+  line-height: 1.6;
+}
+
+.nossa-missao p{
+  font-size: 17px;
+  color: #333;
+  line-height: 1.6;
+}
