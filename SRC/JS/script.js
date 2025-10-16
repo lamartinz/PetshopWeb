@@ -8,44 +8,51 @@ const lista_de_produtos = [
 
 let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
 
-// 🛒 Adicionar ao carrinho
 function adicionar_ao_carrinho(produtoId) {
   const produto = lista_de_produtos.find(p => p.id === produtoId);
   if (!produto) return alert("Erro: Produto não encontrado!");
-
   const existente = carrinho.find(item => item.id === produtoId);
   if (existente) existente.quantidade += 1;
   else carrinho.push({ ...produto, quantidade: 1 });
-
   localStorage.setItem("carrinho", JSON.stringify(carrinho));
   alert("Produto adicionado ao carrinho!");
 }
 
-// 🔍 Filtragem local (na página de produtos)
 function buscarProdutoLocal(filtroRaw = null) {
   const input = document.getElementById("searchInput");
   if (!input) return;
-
-  const filtro = (filtroRaw !== null ? filtroRaw : input.value)
-    .toString()
-    .trim()
-    .toLowerCase();
-
-  const produtos = document.querySelectorAll(".produtos-container .card, .card");
-
-  produtos.forEach(produto => {
-    const nome = (produto.querySelector("h3")?.innerText || "").toLowerCase();
-    produto.style.display = filtro && !nome.includes(filtro) ? "none" : "";
+  const filtro = (filtroRaw !== null ? filtroRaw : input.value).toString().trim().toLowerCase();
+  const secoes = document.querySelectorAll("section, .produtos-container, .categoria");
+  secoes.forEach(secao => {
+    const produtos = secao.querySelectorAll(".card");
+    let temVisivel = false;
+    produtos.forEach(produto => {
+      const nome = (produto.querySelector("h3")?.innerText || "").toLowerCase();
+      const corresponde = !filtro || nome.includes(filtro);
+      produto.style.display = corresponde ? "" : "none";
+      if (corresponde) temVisivel = true;
+    });
+    const titulo = secao.querySelector("h2, h3");
+    secao.style.display = temVisivel ? "" : "none";
+    if (titulo) titulo.style.display = temVisivel ? "" : "none";
   });
 }
 
-// 🌎 Pesquisa global — redireciona para produtos.html?q=busca
 function buscarGlobal() {
   const input = document.getElementById("searchInput");
-  const filtro = input?.value.trim();
-  if (!filtro) return;
-
-  if (window.location.pathname.includes("produtos.html")) {
+  if (!input) return;
+  const filtro = input.value.trim();
+  const estaNaProdutos = /\/?produtos\.html$/i.test(window.location.pathname) || window.location.pathname.endsWith("/produtos.html");
+  if (filtro === "") {
+    if (estaNaProdutos) {
+      buscarProdutoLocal("");
+      input.value = "";
+    } else {
+      window.location.href = "produtos.html";
+    }
+    return;
+  }
+  if (estaNaProdutos) {
     buscarProdutoLocal(filtro);
   } else {
     window.location.href = `produtos.html?q=${encodeURIComponent(filtro)}`;
@@ -55,15 +62,23 @@ function buscarGlobal() {
 document.addEventListener("DOMContentLoaded", () => {
   const input = document.getElementById("searchInput");
   const btn = document.getElementById("searchBtn");
-
-  if (input) input.addEventListener("keypress", e => { if (e.key === "Enter") buscarGlobal(); });
+  if (input) input.addEventListener("keypress", e => { if (e.key === "Enter") { e.preventDefault(); buscarGlobal(); } });
   if (btn) btn.addEventListener("click", buscarGlobal);
-
-  // Quando abrir produtos.html?q=alguma_coisa, aplicar filtro automaticamente
   const params = new URLSearchParams(window.location.search);
   const q = params.get("q");
+  const estaNaProdutos = /\/?produtos\.html$/i.test(window.location.pathname) || window.location.pathname.endsWith("/produtos.html");
   if (q && input) {
     input.value = q;
     buscarProdutoLocal(q);
+  } else if (estaNaProdutos) {
+    buscarProdutoLocal("");
   }
 });
+
+(function(){
+  const path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  document.querySelectorAll('.nav-cards .nav-card').forEach(a=>{
+    const href = (a.getAttribute('href') || '').toLowerCase();
+    if (href === path) a.classList.add('active');
+  });
+})();

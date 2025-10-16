@@ -1,30 +1,75 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/style.css">
   <title>Carrinho - Cãopanheiros PetStore</title>
 </head>
+
 <body>
   <header>
     <h1>Cãopanheiros PetStore</h1>
-    <nav>
-      <a href="index.html">Inicio</a>
-      <a href="produtos.html">Produtos</a>
-      <a href="carrinho.html">Carrinho</a>
-      <a href="sobre.html">Sobre</a>
-      <a href="contato.html">Contato</a>
-      <a href="favoritos.html">Favoritos</a>
-      <a href="login.html">Login</a>
-      <a href="cadastro.html">Cadastro</a>
-
-    </nav>
-        <div class="search-bar">
-            <input type="text" id="searchInput" placeholder="Buscar produtos..." aria-label="Buscar produtos">
-            <button id="searchBtn" aria-label="Pesquisar">🔍</button>
-        </div>
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Buscar produtos..." aria-label="Buscar produtos">
+      <button id="searchBtn" aria-label="Pesquisar">🔍</button>
+    </div>
   </header>
+  <section class="nav-cards" aria-label="Navegação rápida">
+    <div class="nav-cards-grid">
+      <a class="nav-card" href="index.html">
+        <span class="nav-emoji">🏠</span>
+        <div><strong>Início</strong>
+          <div class="nav-sub">Página principal</div>
+        </div>
+      </a>
+      <a class="nav-card" href="produtos.html">
+        <span class="nav-emoji">🛍️</span>
+        <div><strong>Produtos</strong>
+          <div class="nav-sub">Catálogo completo</div>
+        </div>
+      </a>
+      <a class="nav-card" href="carrinho.html">
+        <span class="nav-emoji">🛒</span>
+        <div><strong>Carrinho</strong>
+          <div class="nav-sub">Itens selecionados</div>
+        </div>
+      </a>
+      <a class="nav-card" href="favoritos.html">
+        <span class="nav-emoji">⭐</span>
+        <div><strong>Favoritos</strong>
+          <div class="nav-sub">Seus queridinhos</div>
+        </div>
+      </a>
+      <a class="nav-card" href="sobre.html">
+        <span class="nav-emoji">🐾</span>
+        <div><strong>Sobre</strong>
+          <div class="nav-sub">Quem somos</div>
+        </div>
+      </a>
+      <a class="nav-card" href="contato.html">
+        <span class="nav-emoji">📞</span>
+        <div><strong>Contato</strong>
+          <div class="nav-sub">Fale com a gente</div>
+        </div>
+      </a>
+      <a class="nav-card" href="login.html">
+        <span class="nav-emoji">🔑</span>
+        <div><strong>Login</strong>
+          <div class="nav-sub">Acesse sua conta</div>
+        </div>
+      </a>
+      <a class="nav-card" href="cadastro.html">
+        <span class="nav-emoji">✍️</span>
+        <div><strong>Cadastro</strong>
+          <div class="nav-sub">Crie sua conta</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+
 
   <main>
     <h2>Seu Carrinho</h2>
@@ -105,4 +150,5 @@
     exibirCarrinho();
   </script>
 </body>
+
 </html>

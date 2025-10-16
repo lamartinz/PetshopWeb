@@ -663,3 +663,112 @@ footer{
 .search-bar button:hover {
   background-color: #ff9866;
 }
+
+:root{
+  --header-text:#1f2937;
+  --line:#e5e7eb;
+  --card-bg:#ffffff;
+  --card-hover:#f8fafc;
+  --card-active:#fff7ed;
+  --card-active-border:#fed7aa;
+}
+
+.nav-cards{
+  background:#fff;
+  border-bottom:1px solid var(--line);
+}
+
+.nav-cards-grid{
+  max-width:1100px;
+  margin:12px auto 16px;
+  padding:0 16px 16px;
+  display:grid;
+  grid-template-columns:repeat(4, minmax(0, 1fr));
+  gap:12px;
+}
+
+.nav-card{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  text-decoration:none;
+  color:var(--header-text);
+  background:var(--card-bg);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:14px 16px;
+  box-shadow:0 1px 0 rgba(0,0,0,.02);
+  transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+}
+
+.nav-card:hover,
+.nav-card:focus-visible{
+  background:var(--card-hover);
+  transform:translateY(-2px);
+  box-shadow:0 6px 16px rgba(0,0,0,.06);
+  outline:none;
+}
+
+.nav-card.active{
+  background:var(--card-active);
+  border-color:var(--card-active-border);
+  box-shadow:0 6px 16px rgba(254,215,170,.35);
+}
+
+.nav-emoji{
+  font-size:22px;
+  line-height:1;
+}
+
+.nav-sub{
+  font-size:.85rem;
+  opacity:.7;
+}
+
+@media (max-width:1100px){
+  .nav-cards-grid{ grid-template-columns:repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width:780px){
+  .nav-cards-grid{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width:480px){
+  .nav-cards-grid{ grid-template-columns:1fr; }
+}
+
+.nav-cards .card {
+  all: unset;
+  display: flex;
+  align-items: center;
+}
+
+/* Estilo padrão dos nav-cards já existe, só adicionamos ajustes para o modo "single" */
+
+.nav-cards.single {
+  background: transparent;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 0 30px;
+}
+
+.nav-cards.single .nav-cards-grid {
+  display: flex;
+  justify-content: center;
+}
+
+.nav-cards.single .nav-card {
+  min-width: 220px;
+  text-align: center;
+  justify-content: center;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.nav-cards.single .nav-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+}
