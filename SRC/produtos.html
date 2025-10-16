@@ -20,161 +20,167 @@
       <a href="cadastro.html">Cadastro</a>
       
     </nav>
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Buscar produtos..." onkeyup="buscarProduto()">
+        <button onclick="buscarProduto()">🔍</button>
+    </div>
+
   </header>
+  
 
   <main>
-        <h2>Nossos Produtos</h2><br>
+        <h3>Nossos Produtos</h3><br>
 
-        <h2 class="h2-prod">Rações</h2>
+        <h3 class="h3-prod">Rações</h3>
         <div class="produtos-container"><!--Aqui começa os blocos dos produtos-->
             <div class="card">
                 <img src="IMAGES/img.jpg" alt="Ração Premium Dog">
-                <h2>Ração Golden Premium Dog</h2>
+                <h3>Ração Golden Premium Dog</h3>
                 <p>R$ 120,00</p>
                 <button onclick="adicionar_ao_carrinho(1)">Adicionar ao carrinho</button>
             </div>
 
             <div class="card">
                 <img src="IMAGES/racao.webp" alt="Ração PemieR">
-                <h2>Ração PemieR Seleção Natural</h2>
+                <h3>Ração PemieR Seleção Natural</h3>
                 <p>R$ 115,00</p>
                 <button onclick="adicionar_ao_carrinho(2)">Adicionar ao carrinho</button>
             </div>
 
             <div class="card">
                 <img src="IMAGES/racao2.jpg" alt="Ração Pedigree">
-                <h2>Ração Pedigree Vital</h2>
+                <h3>Ração Pedigree Vital</h3>
                 <p>R$ 125,00</p>
                 <button onclick="adicionar_ao_carrinho(3)">Adicionar ao carrinho</button>
             </div>
 
             <div class="card">
                 <img src="IMAGES/racao3.jpg" alt="Ração Dog Chow">
-                <h2>Ração Dog Chow 1KG</h2>
+                <h3>Ração Dog Chow 1KG</h3>
                 <p>R$ 110,00</p>
                 <button onclick="adicionar_ao_carrinho(4)">Adicionar ao carrinho</button>
             </div>
 
             <div class="card">
                 <img src="IMAGES/racao4.webp" alt="Ração Magnus">
-                <h2>Ração Magnus</h2>
+                <h3>Ração Magnus</h3>
                 <p>R$ 150,00</p>
                 <button onclick="adicionar_ao_carrinho(5)">Adicionar ao carrinho</button>
             </div>
         </div>
 
-        <h2 class="h2-prod">Petiscos</h2>
+        <h3 class="h3-prod">Petiscos</h3>
         <div class="produtos-container">
             
             <div class="card">
                 <img src="IMAGES/pestiscos/petisco1.png" alt="Petisco Biscrok">
-                <h2>Petisco Biscrok Pedigree</h2>
+                <h3>Petisco Biscrok Pedigree</h3>
                 <p>R$ 20,00</p>
                 <button onclick="adicionar_ao_carrinho(1)">Adicionar ao carrinho</button>
             </div>
 
             <div class="card">
                 <img src="IMAGES/pestiscos/petisco2.webp" alt="Petisco Truly">
-                <h2>Petisco Truly Stick</h2>
+                <h3>Petisco Truly Stick</h3>
                 <p>R$ 18,00</p>
                 <button onclick="adicionar_ao_carrinho(2)">Adicionar ao carrinho</button>
             </div>
 
             <div class="card">
                 <img src="IMAGES/pestiscos/petisco3.webp" alt="">
-                <h2>Petisco PremieR Cookie</h2>
+                <h3>Petisco PremieR Cookie</h3>
                 <p>R$ 19,00</p>
                 <button onclick="adicionar_ao_carrinho(3)">Adicionar ao carrinho</button>
             </div>
 
             <div class="card">
                 <img src="IMAGES/pestiscos/petisco4.jpeg" alt="Petisco Dentastix Pedigree">
-                <h2>Petisco Dentastix</h2>
+                <h3>Petisco Dentastix</h3>
                 <p>R$ 23,00</p>
                 <button onclick="adicionar_ao_carrinho(4)">Adicionar ao carrinho</button>
             </div>
 
             <div class="card">
                 <img src="IMAGES/pestiscos/petisconat.jpg" alt="Petisco Natural">
-                <h2>Petisco Natural</h2>
+                <h3>Petisco Natural</h3>
                 <p>R$ 20,00</p>
                 <button onclick="adicionar_ao_carrinho(5)">Adicionar ao carrinho</button>
             </div>
         </div>
 
-        <h2 class="h2-prod">Coleiras</h2>
+        <h3 class="h3-prod">Coleiras</h3>
         <div class="produtos-container">
             
             <div class="card">
                 <img src="IMAGES/coleiras/coleira1.jpg" alt="Coleira de couro">
-                <h2>Coleira de couro preta</h2>
+                <h3>Coleira de couro preta</h3>
                 <p>R$ 30,00</p>
                 <button onclick="adicionar_ao_carrinho(1)">Adicionar ao carrinho</button>
             </div>
 
             <div class="card">
                 <img src="IMAGES/coleiras/coleira2.webp" alt="Coleira Antipuxão">
-                <h2>Coleira peitoral Antipuxão</h2>
+                <h3>Coleira peitoral Antipuxão</h3>
                 <p>R$ 50,00</p>
                 <button onclick="adicionar_ao_carrinho(2)">Adicionar ao carrinho</button>
             </div>
 
             <div class="card">
                 <img src="IMAGES/coleiras/coleira3.jpg" alt="Coleira com guia simples">
-                <h2>Coleira peitoral e guia simples</h2>
+                <h3>Coleira peitoral e guia simples</h3>
                 <p>R$ 35,00</p>
                 <button onclick="adicionar_ao_carrinho(3)">Adicionar ao carrinho</button>
             </div>
 
             <div class="card">
                 <img src="IMAGES/coleiras/coleira4.png" alt="Coleira simples">
-                <h2>Coleira simples</h2>
+                <h3>Coleira simples</h3>
                 <p>R$ 20,00</p>
                 <button onclick="adicionar_ao_carrinho(4)">Adicionar ao carrinho</button>
             </div>
 
             <div class="card">
                 <img src="IMAGES/coleiras/coleirapeit5.jpg" alt="Guia e coleira">
-                <h2>Guia e coleira</h2>
+                <h3>Guia e coleira</h3>
                 <p>R$ 150,00</p>
                 <button onclick="adicionar_ao_carrinho(5)">Adicionar ao carrinho</button>
             </div>
         </div>
 
-        <h2 class="h2-prod">Camas</h2>
+        <h3 class="h3-prod">Camas</h3>
         <div class="produtos-container">
             
             <div class="card">
                 <img src="IMAGES/camas/cama1.webp" alt="Cama simples vermelha">
-                <h2>Cama Simples Vermelha</h2>
+                <h3>Cama Simples Vermelha</h3>
                 <p>R$ 200,00</p>
                 <button onclick="adicionar_ao_carrinho(1)">Adicionar ao carrinho</button>
             </div>
 
             <div class="card">
                 <img src="IMAGES/camas/cama2.webp" alt="Cama simples cinza">
-                <h2>Cama Simples Cinza</h2>
+                <h3>Cama Simples Cinza</h3>
                 <p>R$ 35,00</p>
                 <button onclick="adicionar_ao_carrinho(2)">Adicionar ao carrinho</button>
             </div>
 
             <div class="card">
                 <img src="IMAGES/camas/cama3.webp" alt="Cama Casinha">
-                <h2>Cama casinha industrial</h2>
+                <h3>Cama casinha industrial</h3>
                 <p>R$ 250,00</p>
                 <button onclick="adicionar_ao_carrinho(3)">Adicionar ao carrinho</button>
             </div>
 
             <div class="card">
                 <img src="IMAGES/camas/cama4.jpeg" alt="Cama de Madeira Moderna">
-                <h2>Cama Moderna Confort</h2>
+                <h3>Cama Moderna Confort</h3>
                 <p>R$ 25,00</p>
                 <button onclick="adicionar_ao_carrinho(4)">Adicionar ao carrinho</button>
             </div>
 
             <div class="card">
                 <img src="IMAGES/camas/cama5.jpg" alt="Cama Confort">
-                <h2>Cama Confort</h2>
+                <h3>Cama Confort</h3>
                 <p>R$ 240,00</p>
                 <button onclick="adicionar_ao_carrinho(5)">Adicionar ao carrinho</button>
             </div>
@@ -184,29 +190,6 @@
   <footer>
     <p>© 2025 Cãopanheiros PetStore LTDA</p>
   </footer>
-
-  <script src="js/script.js"></script>
-  <script>
-    function carregarProdutos() {
-      const container = document.getElementById("produtos-container");
-      container.innerHTML = "";
-
-      lista_de_produtos.forEach(produto => {
-        let card = document.createElement("div");
-        card.classList.add("card");
-
-        card.innerHTML = `
-          <img src="${produto.imagem}" alt="${produto.nome}">
-          <h2>${produto.nome}</h2>
-          <p>R$ ${produto.preco.toFixed(2)}</p>
-          <button onclick="adicionar_ao_carrinho(${produto.id})">Adicionar ao carrinho</button>
-        `;
-
-        container.appendChild(card);
-      });
-    }
-
-    carregarProdutos();
-  </script>
+<script src="js/script.js"></script>
 </body>
 </html>
