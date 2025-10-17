@@ -69,8 +69,6 @@
     </div>
   </section>
 
-
-
   <main>
     <h2>Seu Carrinho</h2>
     <div id="lista-carrinho" class="carrinho-container"></div>
@@ -84,71 +82,86 @@
 
   <script src="js/script.js"></script>
   <script>
-    function exibirCarrinho() {
-      let container = document.getElementById("lista-carrinho");
-      let total = document.getElementById("total");
-      container.innerHTML = "";
-      let soma = 0;
+    (function () {
+      const nf = v => (v || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
-      carrinho.forEach((item, i) => {
-        const subtotal = item.preco * item.quantidade;
+      function getCart() { try { return JSON.parse(localStorage.getItem('carrinho')) || [] } catch (e) { return [] } }
+      function setCart(c) { localStorage.setItem('carrinho', JSON.stringify(c)); window.carrinho = c; }
 
-        let div = document.createElement("div");
-        div.classList.add("item-carrinho");
+      window.carrinho = Array.isArray(window.carrinho) ? window.carrinho : getCart();
 
-        div.innerHTML = `
-          <img src="${item.imagem}" alt="${item.nome}" class="img-carrinho">
-          <div class="info-carrinho">
-            <h3>${item.nome}</h3>
-            <p>Preço: R$ ${item.preco.toFixed(2)}</p>
-            <p>Subtotal: R$ ${subtotal.toFixed(2)}</p>
-            <div class="controles">
-              <button onclick="alterarQuantidade(${item.id}, -1)">➖</button>
-              <span>${item.quantidade}</span>
-              <button onclick="alterarQuantidade(${item.id}, 1)">➕</button>
-              <button class="remover" onclick="removerItem(${item.id})">❌ Remover</button>
-            </div>
+      function exibirCarrinho() {
+        const container = document.getElementById("lista-carrinho");
+        const totalEl = document.getElementById("total");
+        const cart = getCart();
+        container.innerHTML = "";
+
+        if (!cart.length) {
+          totalEl.textContent = "Total: " + nf(0);
+          container.innerHTML = "<p>Seu carrinho está vazio 🐶</p>";
+          return;
+        }
+
+        let soma = 0;
+        cart.forEach(item => {
+          const subtotal = (item.preco || 0) * (item.quantidade || 1);
+          soma += subtotal;
+
+          const div = document.createElement("div");
+          div.classList.add("item-carrinho");
+          div.innerHTML = `
+        <img src="${item.imagem || ''}" alt="${item.nome || ''}" class="img-carrinho">
+        <div class="info-carrinho">
+          <h3>${item.nome || ''}</h3>
+          <p>Preço: ${nf(item.preco || 0)}</p>
+          <p>Subtotal: ${nf(subtotal)}</p>
+          <div class="controles">
+            <button class="qty-btn" onclick="alterarQuantidade('${item.id}', -1)">➖</button>
+            <span>${item.quantidade || 1}</span>
+            <button class="qty-btn" onclick="alterarQuantidade('${item.id}', 1)">➕</button>
+            <button class="remover" onclick="removerItem('${item.id}')">❌ Remover</button>
           </div>
-        `;
+        </div>
+      `;
+          container.appendChild(div);
+        });
 
-        container.appendChild(div);
-        soma += subtotal;
-      });
-
-      total.textContent = "Total: R$ " + soma.toFixed(2);
-    }
-
-    function alterarQuantidade(id, delta) {
-      let item = carrinho.find(p => p.id === id);
-      if (!item) return;
-
-      item.quantidade += delta;
-      if (item.quantidade <= 0) {
-        carrinho = carrinho.filter(p => p.id !== id);
+        totalEl.textContent = "Total: " + nf(soma);
       }
-      localStorage.setItem("carrinho", JSON.stringify(carrinho));
-      exibirCarrinho();
-    }
 
-    function removerItem(id) {
-      carrinho = carrinho.filter(p => p.id !== id);
-      localStorage.setItem("carrinho", JSON.stringify(carrinho));
-      exibirCarrinho();
-    }
-
-    function finalizarCompra() {
-      if (carrinho.length === 0) {
-        alert("Seu carrinho está vazio!");
-        return;
+      function alterarQuantidade(id, delta) {
+        const cart = getCart();
+        const item = cart.find(p => p.id === id);
+        if (!item) return;
+        item.quantidade = Math.max(0, (item.quantidade || 1) + delta);
+        const novo = item.quantidade === 0 ? cart.filter(p => p.id !== id) : cart;
+        setCart(novo);
+        exibirCarrinho();
       }
-      alert("Compra finalizada com sucesso!");
-      localStorage.removeItem("carrinho");
-      carrinho = [];
-      exibirCarrinho();
-    }
 
-    exibirCarrinho();
+      function removerItem(id) {
+        const cart = getCart().filter(p => p.id !== id);
+        setCart(cart);
+        exibirCarrinho();
+      }
+
+      function finalizarCompra() {
+        const cart = getCart();
+        if (!cart.length) { alert("Seu carrinho está vazio!"); return; }
+        alert("Compra finalizada com sucesso!");
+        setCart([]);
+        exibirCarrinho();
+      }
+
+      window.alterarQuantidade = alterarQuantidade;
+      window.removerItem = removerItem;
+      window.finalizarCompra = finalizarCompra;
+
+      exibirCarrinho();
+    })();
   </script>
+
+
 </body>
 
 </html>
