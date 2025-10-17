@@ -10,14 +10,26 @@
 <script src="js/script.js"></script>
 
 <body>
-  <header>
-    <h1>Cãopanheiros PetStore</h1>
-    </nav>
-    <div class="search-bar">
-      <input type="text" id="searchInput" placeholder="Buscar produtos..." aria-label="Buscar produtos">
-      <button id="searchBtn" aria-label="Pesquisar">🔍</button>
+
+  <header class="site-header">
+    <div class="header-wrap">
+      <a href="index.html" class="logo">Cãopanheiros <span>PetStore</span></a>
+
+      <div class="search-bar header-search">
+        <input type="text" id="searchInput" placeholder="Buscar produtos..." aria-label="Buscar produtos">
+        <button id="searchBtn" aria-label="Pesquisar">🔍</button>
+      </div>
+
+      <nav class="header-icons">
+        <a href="favoritos.html" title="Favoritos" class="icon-btn">⭐</a>
+        <a href="contato.html" title="Contato" class="icon-btn">📞</a>
+        <a href="carrinho.html" title="Carrinho" class="icon-btn">🛒</a>
+        <a href="login.html" title="Login/Cadastro" class="icon-btn">👤</a>
+      </nav>
     </div>
   </header>
+
+
   <section class="nav-cards" aria-label="Navegação rápida">
     <div class="nav-cards-grid">
       <a class="nav-card" href="index.html">
@@ -32,42 +44,19 @@
           <div class="nav-sub">Catálogo completo</div>
         </div>
       </a>
-      <a class="nav-card" href="carrinho.html">
-        <span class="nav-emoji">🛒</span>
-        <div><strong>Carrinho</strong>
-          <div class="nav-sub">Itens selecionados</div>
-        </div>
-      </a>
-      <a class="nav-card" href="favoritos.html">
-        <span class="nav-emoji">⭐</span>
-        <div><strong>Favoritos</strong>
-          <div class="nav-sub">Seus queridinhos</div>
-        </div>
-      </a>
       <a class="nav-card" href="sobre.html">
         <span class="nav-emoji">🐾</span>
         <div><strong>Sobre</strong>
           <div class="nav-sub">Quem somos</div>
         </div>
       </a>
-      <a class="nav-card" href="contato.html">
-        <span class="nav-emoji">📞</span>
-        <div><strong>Contato</strong>
-          <div class="nav-sub">Fale com a gente</div>
+      <a class="nav-card" href="servicos.html">
+        <span class="nav-emoji">🩺</span>
+        <div><strong>Serviços Vet</strong>
+          <div class="nav-sub">Clínica e cuidados</div>
         </div>
       </a>
-      <a class="nav-card" href="login.html">
-        <span class="nav-emoji">🔑</span>
-        <div><strong>Login</strong>
-          <div class="nav-sub">Acesse sua conta</div>
-        </div>
-      </a>
-      <a class="nav-card" href="cadastro.html">
-        <span class="nav-emoji">✍️</span>
-        <div><strong>Cadastro</strong>
-          <div class="nav-sub">Crie sua conta</div>
-        </div>
-      </a>
+
     </div>
   </section>
 
