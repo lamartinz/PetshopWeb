@@ -206,8 +206,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isSuccess()) {
       try {
         const p = JSON.parse(localStorage.getItem('ultimo_pedido') || 'null');
-        if (p && p.total) {}
-      } catch (e) {}
+        if (p && p.total) { }
+      } catch (e) { }
     }
   });
 })();
@@ -243,3 +243,296 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.addEventListener('DOMContentLoaded', initPromoCarousel);
 })();
+
+if (window.location.pathname.includes('checkout.html')) {
+
+  const nf = v => (v || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+  const getCart = () => { try { return JSON.parse(localStorage.getItem('carrinho')) || [] } catch (e) { return [] } };
+  const setCart = c => localStorage.setItem('carrinho', JSON.stringify(c));
+
+  let subtotal = 0, frete = 19.9, descontoPix = 0, total = 0;
+
+  function renderOrder() {
+    const list = document.getElementById('order-list');
+    const cart = getCart();
+    list.innerHTML = '';
+    if (!cart.length) {
+      list.innerHTML = '<p>Seu carrinho está vazio 🐶</p>';
+      updateTotals();
+      return;
+    }
+    subtotal = 0;
+    cart.forEach(it => {
+      const sub = (it.preco || 0) * (it.quantidade || 1);
+      subtotal += sub;
+      const row = document.createElement('div');
+      row.className = 'order-item';
+      row.innerHTML = `
+        <img src="${it.imagem || ''}" alt="">
+        <div>
+          <div style="font-weight:700">${it.nome || ''}</div>
+          <div>Qtd: ${it.quantidade || 1}</div>
+        </div>
+        <div>${nf(sub)}</div>
+      `;
+      list.appendChild(row);
+    });
+    updateTotals();
+  }
+
+  function updateTotals() {
+    const pay = document.querySelector('input[name="pay"]:checked')?.value || 'pix';
+    descontoPix = pay === 'pix' ? 0.05 : 0;
+    const desc = subtotal * descontoPix;
+    const base = subtotal - desc;
+    total = base + frete;
+    document.getElementById('sum-sub').textContent = nf(subtotal);
+    document.getElementById('sum-frete').textContent = nf(frete);
+    document.getElementById('sum-total').textContent = nf(total);
+  }
+
+  function applyCupom() {
+    const code = document.getElementById('cupom').value.trim().toUpperCase();
+    if (!code) return;
+    if (code === 'AUMIGO10') {
+      subtotal = Math.max(0, subtotal * 0.9);
+      updateTotals();
+      document.getElementById('cupom').value = '';
+      alert('Cupom aplicado: 10% de desconto!');
+    } else {
+      alert('Cupom inválido.');
+    }
+  }
+
+  function togglePayFields() {
+    const pay = document.querySelector('input[name="pay"]:checked')?.value;
+    const box = document.getElementById('card-fields');
+    box.style.display = pay === 'card' ? 'block' : 'none';
+    document.getElementById('pay-warn').hidden = true;
+    updateTotals();
+  }
+
+  function validateAddress() {
+    const req = ['f_nome', 'f_email', 'f_tel', 'f_cep', 'f_endereco', 'f_bairro', 'f_cidade', 'f_uf'];
+    let ok = true;
+    req.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el || !el.value.trim()) ok = false;
+    });
+    document.getElementById('addr-warn').hidden = ok;
+    return ok;
+  }
+
+  function validateCardIfNeeded() {
+    const pay = document.querySelector('input[name="pay"]:checked')?.value;
+    if (pay !== 'card') {
+      document.getElementById('pay-warn').hidden = true;
+      return true;
+    }
+    const need = ['cc_num', 'cc_val', 'cc_cvv', 'cc_name'];
+    let ok = true;
+    need.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el || !el.value.trim()) ok = false;
+    });
+    document.getElementById('pay-warn').hidden = ok;
+    return ok;
+  }
+
+  function finishOrder() {
+    const cart = getCart();
+    if (!cart.length) {
+      alert('Seu carrinho está vazio!');
+      return;
+    }
+    if (!validateAddress()) return;
+    if (!validateCardIfNeeded()) return;
+    const pedido = {
+      itens: cart, subtotal, frete, descontoPix, total,
+      cliente: {
+        nome: document.getElementById('f_nome').value.trim(),
+        email: document.getElementById('f_email').value.trim(),
+        tel: document.getElementById('f_tel').value.trim(),
+        cep: document.getElementById('f_cep').value.trim(),
+        endereco: document.getElementById('f_endereco').value.trim(),
+        bairro: document.getElementById('f_bairro').value.trim(),
+        cidade: document.getElementById('f_cidade').value.trim(),
+        uf: document.getElementById('f_uf').value
+      },
+      pagamento: document.querySelector('input[name="pay"]:checked')?.value
+    };
+    localStorage.setItem('ultimo_pedido', JSON.stringify(pedido));
+    setCart([]);
+    window.location.href = 'sucesso.html';
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    renderOrder();
+    document.querySelectorAll('input[name="frete"]').forEach(r => {
+      r.addEventListener('change', () => {
+        frete = parseFloat(r.value || '0') || 0;
+        updateTotals();
+      });
+    });
+    document.querySelectorAll('input[name="pay"]').forEach(r => r.addEventListener('change', togglePayFields));
+    document.getElementById('btn-cupom').addEventListener('click', applyCupom);
+    document.getElementById('btn-finalizar').addEventListener('click', finishOrder);
+    togglePayFields();
+  });
+
+}
+
+if (window.location.pathname.split('/').pop().toLowerCase() === 'carrinho.html') {
+
+  const nf = v => (v || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+  const getCart = () => { try { return JSON.parse(localStorage.getItem('carrinho')) || [] } catch (e) { return [] } };
+  const setCart = c => { localStorage.setItem('carrinho', JSON.stringify(c)); window.carrinho = c; };
+
+  window.carrinho = Array.isArray(window.carrinho) ? window.carrinho : getCart();
+
+  function exibirCarrinho() {
+    const container = document.getElementById("lista-carrinho");
+    const totalEl = document.getElementById("total");
+    const cart = getCart();
+    container.innerHTML = "";
+
+    if (!cart.length) {
+      totalEl.textContent = "Total: " + nf(0);
+      container.innerHTML = "<p>Seu carrinho está vazio 🐶</p>";
+      return;
+    }
+
+    let soma = 0;
+    cart.forEach(item => {
+      const subtotal = (item.preco || 0) * (item.quantidade || 1);
+      soma += subtotal;
+
+      const div = document.createElement("div");
+      div.className = "item-carrinho";
+      div.innerHTML = `
+        <img src="${item.imagem || ''}" alt="${(item.nome || '').replace(/"/g, '')}" class="img-carrinho">
+        <div class="info-carrinho">
+          <h3>${item.nome || ''}</h3>
+          <p>Preço: ${nf(item.preco || 0)}</p>
+          <p>Subtotal: ${nf(subtotal)}</p>
+          <div class="controles">
+            <button class="qty-btn" data-act="dec" data-id="${item.id}">➖</button>
+            <span aria-live="polite">${item.quantidade || 1}</span>
+            <button class="qty-btn" data-act="inc" data-id="${item.id}">➕</button>
+            <button class="remover" data-act="rm" data-id="${item.id}">❌ Remover</button>
+          </div>
+        </div>
+      `;
+      container.appendChild(div);
+    });
+
+    totalEl.textContent = "Total: " + nf(soma);
+
+    window.__cart_total = soma;
+  }
+
+  function alterarQuantidade(id, delta) {
+    const cart = getCart();
+    const idx = cart.findIndex(p => p.id === id);
+    if (idx < 0) return;
+    cart[idx].quantidade = Math.max(0, (cart[idx].quantidade || 1) + delta);
+    const novo = cart[idx].quantidade === 0 ? cart.filter(p => p.id !== id) : cart;
+    setCart(novo);
+    exibirCarrinho();
+  }
+
+  function removerItem(id) {
+    const cart = getCart().filter(p => p.id !== id);
+    setCart(cart);
+    exibirCarrinho();
+  }
+
+  function finalizarCompra() {
+    const cart = getCart();
+    if (!cart.length) { alert("Seu carrinho está vazio!"); return; }
+    localStorage.setItem("carrinho", JSON.stringify(cart));
+    window.location.href = "checkout.html";
+  }
+
+  document.addEventListener('click', function (e) {
+    const btn = e.target.closest('[data-act]');
+    if (!btn) return;
+    const act = btn.getAttribute('data-act');
+    const id = btn.getAttribute('data-id');
+    if (!act || !id) return;
+    if (act === 'inc') alterarQuantidade(id, 1);
+    if (act === 'dec') alterarQuantidade(id, -1);
+    if (act === 'rm') removerItem(id);
+  });
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const btnFinalizar = document.getElementById('btn-finalizar');
+    if (btnFinalizar) btnFinalizar.addEventListener('click', finalizarCompra);
+    exibirCarrinho();
+  });
+
+  window.alterarQuantidade = function (id, delta) { alterarQuantidade(id, delta); };
+  window.removerItem = function (id) { removerItem(id); };
+  window.finalizarCompra = function () { finalizarCompra(); };
+}
+
+if (window.location.pathname.split('/').pop().toLowerCase() === 'favoritos.html') {
+
+  const getFavs = () => { try { return JSON.parse(localStorage.getItem('favoritos')) || [] } catch (e) { return [] } };
+  const setFavs = v => localStorage.setItem('favoritos', JSON.stringify(v));
+
+  function exibirFavoritos() {
+    const lista = document.getElementById('lista-favoritos');
+    const favoritos = getFavs();
+    lista.innerHTML = '';
+
+    if (!favoritos.length) {
+      lista.innerHTML = '<li>Nenhum produto favorito ainda.</li>';
+      return;
+    }
+
+    favoritos.forEach(item => {
+      const li = document.createElement('li');
+
+      const thumb = document.createElement('img');
+      thumb.className = 'fav-thumb';
+      thumb.src = item.imagem || 'IMAGES/placeholder.png';
+      thumb.alt = item.nome || 'Produto';
+
+      const info = document.createElement('div');
+      info.className = 'fav-info';
+      info.innerHTML = `<div class="name">${item.nome || ''}</div><div class="price">R$ ${Number(item.preco || 0).toFixed(2)}</div>`;
+
+      const actions = document.createElement('div');
+      actions.className = 'fav-actions';
+      const btnRemove = document.createElement('button');
+      btnRemove.className = 'btn-fav-remove';
+      btnRemove.type = 'button';
+      btnRemove.textContent = 'Remover';
+      btnRemove.addEventListener('click', () => {
+        removerFavorito(item.id || item.nome);
+      });
+
+      actions.appendChild(btnRemove);
+      li.appendChild(thumb);
+      li.appendChild(info);
+      li.appendChild(actions);
+      lista.appendChild(li);
+    });
+  }
+
+  function removerFavorito(idOrName) {
+    const favs = getFavs().filter(f => (f.id || f.nome) !== idOrName);
+    setFavs(favs);
+    exibirFavoritos();
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    exibirFavoritos();
+    const btnClear = document.getElementById('btn-clear-fav');
+    if (btnClear) btnClear.addEventListener('click', () => { setFavs([]); exibirFavoritos(); });
+  });
+
+}
+
+

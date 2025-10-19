@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Carrinho - Cãopanheiros PetStore</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/cart.css" />
 </head>
-
 <body>
 
   <header class="site-header">
@@ -28,131 +27,28 @@
     </div>
   </header>
 
-
-
-  <section class="nav-cards" aria-label="Navegação rápida">
-    <div class="nav-cards-grid">
-      <a class="nav-card" href="index.html">
-        <span class="nav-emoji">🏠</span>
-        <div><strong>Início</strong>
-          <div class="nav-sub">Página principal</div>
-        </div>
-      </a>
-      <a class="nav-card" href="produtos.html">
-        <span class="nav-emoji">🛍️</span>
-        <div><strong>Produtos</strong>
-          <div class="nav-sub">Catálogo completo</div>
-        </div>
-      </a>
-      <a class="nav-card" href="sobre.html">
-        <span class="nav-emoji">🐾</span>
-        <div><strong>Sobre</strong>
-          <div class="nav-sub">Quem somos</div>
-        </div>
-      </a>
-      <a class="nav-card" href="servicos.html">
-        <span class="nav-emoji">🩺</span>
-        <div><strong>Serviços Vet</strong>
-          <div class="nav-sub">Clínica e cuidados</div>
-        </div>
-      </a>
-    </div>
-  </section>
-
-  <main>
+  <main class="page-container">
     <h2>Seu Carrinho</h2>
-    <div id="lista-carrinho" class="carrinho-container"></div>
-    <p id="total"></p>
-    <button onclick="finalizarCompra()">Finalizar Compra</button>
+
+    <div id="lista-carrinho" class="carrinho-container" aria-live="polite"></div>
+
+    <div class="cart-footer">
+      <div id="total" class="cart-total">Total: R$ 0,00</div>
+      <div class="cart-actions">
+        <a href="produtos.html" class="btn-outline">Continuar comprando</a>
+        <button id="btn-finalizar" class="btn">Finalizar Compra</button>
+      </div>
+    </div>
   </main>
 
-  <footer>
-    <p>© 2025 Cãopanheiros PetStore LTDA</p>
+  <footer class="site-footer">
+    <p>Para valores diferentes, o preço final será sempre o da sacola de compras.<br>
+      CãoPanheiros PetCenter S/A - CNPJ 00.000.000/0000-00 - Endereço: Rua tal 000 - Fortaleza - Ceará - CE - CEP: 00000-000<br>
+      © 2025 CãoPanheiros PetCenter S/A - Todos os direitos reservados - v0.00.0
+    </p>
   </footer>
 
-  <script src="js/script.js"></script>
-  <script>
-    (function () {
-      const nf = v => (v || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-
-      function getCart() { try { return JSON.parse(localStorage.getItem('carrinho')) || [] } catch (e) { return [] } }
-      function setCart(c) { localStorage.setItem('carrinho', JSON.stringify(c)); window.carrinho = c; }
-
-      window.carrinho = Array.isArray(window.carrinho) ? window.carrinho : getCart();
-
-      function exibirCarrinho() {
-        const container = document.getElementById("lista-carrinho");
-        const totalEl = document.getElementById("total");
-        const cart = getCart();
-        container.innerHTML = "";
-
-        if (!cart.length) {
-          totalEl.textContent = "Total: " + nf(0);
-          container.innerHTML = "<p>Seu carrinho está vazio 🐶</p>";
-          return;
-        }
-
-        let soma = 0;
-        cart.forEach(item => {
-          const subtotal = (item.preco || 0) * (item.quantidade || 1);
-          soma += subtotal;
-
-          const div = document.createElement("div");
-          div.classList.add("item-carrinho");
-          div.innerHTML = `
-        <img src="${item.imagem || ''}" alt="${item.nome || ''}" class="img-carrinho">
-        <div class="info-carrinho">
-          <h3>${item.nome || ''}</h3>
-          <p>Preço: ${nf(item.preco || 0)}</p>
-          <p>Subtotal: ${nf(subtotal)}</p>
-          <div class="controles">
-            <button class="qty-btn" onclick="alterarQuantidade('${item.id}', -1)">➖</button>
-            <span>${item.quantidade || 1}</span>
-            <button class="qty-btn" onclick="alterarQuantidade('${item.id}', 1)">➕</button>
-            <button class="remover" onclick="removerItem('${item.id}')">❌ Remover</button>
-          </div>
-        </div>
-      `;
-          container.appendChild(div);
-        });
-
-        totalEl.textContent = "Total: " + nf(soma);
-      }
-
-      function alterarQuantidade(id, delta) {
-        const cart = getCart();
-        const item = cart.find(p => p.id === id);
-        if (!item) return;
-        item.quantidade = Math.max(0, (item.quantidade || 1) + delta);
-        const novo = item.quantidade === 0 ? cart.filter(p => p.id !== id) : cart;
-        setCart(novo);
-        exibirCarrinho();
-      }
-
-      function removerItem(id) {
-        const cart = getCart().filter(p => p.id !== id);
-        setCart(cart);
-        exibirCarrinho();
-      }
-
-      function finalizarCompra() {
-        if (!carrinho || !carrinho.length) {
-          alert("Seu carrinho está vazio!");
-          return;
-        }
-        localStorage.setItem("carrinho", JSON.stringify(carrinho));
-        window.location.href = "checkout.html";
-      }
-
-      window.alterarQuantidade = alterarQuantidade;
-      window.removerItem = removerItem;
-      window.finalizarCompra = finalizarCompra;
-
-      exibirCarrinho();
-    })();
-  </script>
-
-
+  <script src="js/script.js" defer></script>
+  <script src="js/cart.js" defer></script>
 </body>
-
 </html>

@@ -1,46 +1,55 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Finalizar compra - Cãopanheiros PetStore</title>
   <link rel="stylesheet" href="css/style.css">
-  <style>
-    .checkout-page{max-width:1100px;margin:16px auto;padding:0 16px;display:grid;grid-template-columns:1fr 380px;gap:16px}
-    .checkout-card{background:#fff;border:1px solid var(--muted);border-radius:14px;padding:16px;box-shadow:0 2px 6px rgba(0,0,0,.04)}
-    .checkout-card h3{margin:0 0 12px;font-family:'Baloo 2','Fredoka One',cursive;color:var(--brand-strong)}
-    .checkout-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .checkout-grid .full{grid-column:1/-1}
-    .checkout-row{display:flex;flex-direction:column;gap:6px}
-    .checkout-row input, .checkout-row select{padding:10px;border:1px solid #ccc;border-radius:10px}
-    .ship-list, .pay-list{display:flex;flex-direction:column;gap:10px}
-    .ship-item, .pay-item{display:flex;align-items:center;gap:10px;border:1px solid var(--muted);border-radius:12px;padding:10px}
-    .summ-line{display:flex;justify-content:space-between;margin:6px 0}
-    .summ-total{font-size:1.1rem;font-weight:700}
-    .order-item{display:grid;grid-template-columns:56px 1fr auto;gap:10px;align-items:center;padding:8px 0;border-bottom:1px dashed var(--muted)}
-    .order-item:last-child{border-bottom:0}
-    .order-item img{width:56px;height:56px;object-fit:cover;border-radius:10px;border:1px solid #f1f5f9}
-    .coupon{display:flex;gap:8px;margin-top:8px}
-    .coupon input{flex:1;padding:10px;border:1px solid #ccc;border-radius:10px}
-    .warn{color:#b91c1c;font-size:.9rem;margin-top:8px}
-    @media(max-width:980px){.checkout-page{grid-template-columns:1fr}}
-  </style>
+  <link rel="stylesheet" href="css/checkout.css">
 </head>
+
 <body>
-  <header>
-    <h1>Cãopanheiros PetStore</h1>
-    <div class="search-bar">
-      <input type="text" id="searchInput" placeholder="Buscar produtos...">
-      <button id="searchBtn">🔍</button>
+  <header class="site-header">
+    <div class="header-wrap">
+      <a href="index.html" class="logo">Cãopanheiros <span>PetStore</span></a>
+
+      <div class="search-bar header-search">
+        <input type="text" id="searchInput" placeholder="Buscar produtos..." aria-label="Buscar produtos">
+        <button id="searchBtn" aria-label="Pesquisar">🔍</button>
+      </div>
+
+      <nav class="header-icons">
+        <a href="favoritos.html" title="Favoritos" class="icon-btn">⭐</a>
+        <a href="contato.html" title="Contato" class="icon-btn">📞</a>
+        <a href="carrinho.html" title="Carrinho" class="icon-btn">🛒</a>
+        <a href="login.html" title="Login/Cadastro" class="icon-btn">👤</a>
+      </nav>
     </div>
   </header>
 
   <section class="nav-cards" aria-label="Navegação rápida">
     <div class="nav-cards-grid">
-      <a class="nav-card" href="index.html"><span class="nav-emoji">🏠</span><div><strong>Início</strong><div class="nav-sub">Página principal</div></div></a>
-      <a class="nav-card" href="produtos.html"><span class="nav-emoji">🛍️</span><div><strong>Produtos</strong><div class="nav-sub">Catálogo completo</div></div></a>
-      <a class="nav-card" href="carrinho.html"><span class="nav-emoji">🛒</span><div><strong>Carrinho</strong><div class="nav-sub">Itens selecionados</div></div></a>
-      <a class="nav-card active" href="checkout.html"><span class="nav-emoji">📦</span><div><strong>Finalizar</strong><div class="nav-sub">Entrega e pagamento</div></div></a>
+      <a class="nav-card" href="index.html"><span class="nav-emoji">🏠</span>
+        <div><strong>Início</strong>
+          <div class="nav-sub">Página principal</div>
+        </div>
+      </a>
+      <a class="nav-card" href="produtos.html"><span class="nav-emoji">🛍️</span>
+        <div><strong>Produtos</strong>
+          <div class="nav-sub">Catálogo completo</div>
+        </div>
+      </a>
+      <a class="nav-card" href="carrinho.html"><span class="nav-emoji">🛒</span>
+        <div><strong>Carrinho</strong>
+          <div class="nav-sub">Itens selecionados</div>
+        </div>
+      </a>
+      <a class="nav-card active" href="checkout.html"><span class="nav-emoji">📦</span>
+        <div><strong>Finalizar</strong>
+          <div class="nav-sub">Entrega e pagamento</div>
+        </div>
+      </a>
     </div>
   </section>
 
@@ -50,19 +59,43 @@
       <div class="checkout-grid">
         <div class="checkout-row"><label>Nome completo</label><input id="f_nome" autocomplete="name"></div>
         <div class="checkout-row"><label>E-mail</label><input id="f_email" type="email" autocomplete="email"></div>
-        <div class="checkout-row"><label>Telefone</label><input id="f_tel" type="tel" placeholder="(DDD) 9 9999-9999"></div>
+        <div class="checkout-row"><label>Telefone</label><input id="f_tel" type="tel" placeholder="(DDD) 9 9999-9999">
+        </div>
         <div class="checkout-row"><label>CEP</label><input id="f_cep" placeholder="00000-000"></div>
-        <div class="checkout-row full"><label>Endereço</label><input id="f_endereco" placeholder="Rua, nº, complemento"></div>
+        <div class="checkout-row full"><label>Endereço</label><input id="f_endereco" placeholder="Rua, nº, complemento">
+        </div>
         <div class="checkout-row"><label>Bairro</label><input id="f_bairro"></div>
         <div class="checkout-row"><label>Cidade</label><input id="f_cidade"></div>
         <div class="checkout-row"><label>Estado</label>
           <select id="f_uf">
             <option value="">Selecione</option>
-            <option>CE</option><option>PE</option><option>PI</option><option>RN</option><option>PB</option>
-            <option>BA</option><option>AL</option><option>SE</option><option>MA</option><option>SP</option>
-            <option>RJ</option><option>MG</option><option>RS</option><option>SC</option><option>PR</option>
-            <option>DF</option><option>GO</option><option>MT</option><option>MS</option><option>ES</option>
-            <option>AM</option><option>PA</option><option>AP</option><option>RR</option><option>RO</option><option>AC</option><option>TO</option>
+            <option>CE</option>
+            <option>PE</option>
+            <option>PI</option>
+            <option>RN</option>
+            <option>PB</option>
+            <option>BA</option>
+            <option>AL</option>
+            <option>SE</option>
+            <option>MA</option>
+            <option>SP</option>
+            <option>RJ</option>
+            <option>MG</option>
+            <option>RS</option>
+            <option>SC</option>
+            <option>PR</option>
+            <option>DF</option>
+            <option>GO</option>
+            <option>MT</option>
+            <option>MS</option>
+            <option>ES</option>
+            <option>AM</option>
+            <option>PA</option>
+            <option>AP</option>
+            <option>RR</option>
+            <option>RO</option>
+            <option>AC</option>
+            <option>TO</option>
           </select>
         </div>
       </div>
@@ -85,7 +118,8 @@
     <section class="checkout-card">
       <h3>Forma de envio</h3>
       <div class="ship-list">
-        <label class="ship-item"><input type="radio" name="frete" value="19.9" checked> Padrão (3–6 dias) — R$ 19,90</label>
+        <label class="ship-item"><input type="radio" name="frete" value="19.9" checked> Padrão (3–6 dias) — R$
+          19,90</label>
         <label class="ship-item"><input type="radio" name="frete" value="39.9"> Expresso (1–2 dias) — R$ 39,90</label>
         <label class="ship-item"><input type="radio" name="frete" value="0"> Retirada na loja — R$ 0,00</label>
       </div>
@@ -94,16 +128,19 @@
     <section class="checkout-card">
       <h3>Pagamento</h3>
       <div class="pay-list">
-        <label class="pay-item"><input type="radio" name="pay" value="pix" checked> Pix (5% de desconto no total)</label>
+        <label class="pay-item"><input type="radio" name="pay" value="pix" checked> Pix (5% de desconto no
+          total)</label>
         <label class="pay-item"><input type="radio" name="pay" value="card"> Cartão de crédito</label>
       </div>
 
       <div id="card-fields" style="display:none; margin-top:10px;">
         <div class="checkout-grid">
-          <div class="checkout-row full"><label>Número do cartão</label><input id="cc_num" inputmode="numeric" placeholder="0000 0000 0000 0000"></div>
+          <div class="checkout-row full"><label>Número do cartão</label><input id="cc_num" inputmode="numeric"
+              placeholder="0000 0000 0000 0000"></div>
           <div class="checkout-row"><label>Validade (MM/AA)</label><input id="cc_val" placeholder="MM/AA"></div>
           <div class="checkout-row"><label>CVV</label><input id="cc_cvv" inputmode="numeric" placeholder="123"></div>
-          <div class="checkout-row full"><label>Titular</label><input id="cc_name" placeholder="Nome impresso no cartão"></div>
+          <div class="checkout-row full"><label>Titular</label><input id="cc_name"
+              placeholder="Nome impresso no cartão"></div>
         </div>
       </div>
 
@@ -116,126 +153,11 @@
     </section>
   </main>
 
-  <footer><p>© 2025 Cãopanheiros PetStore LTDA</p></footer>
+  <footer>
+    <p>© 2025 Cãopanheiros PetStore LTDA</p>
+  </footer>
 
-  <script src="js/script.js" defer></script>
-  <script>
-    const nf=v=>(v||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
-    const getCart=()=>{try{return JSON.parse(localStorage.getItem('carrinho'))||[]}catch(e){return[]}};
-    const setCart=c=>localStorage.setItem('carrinho',JSON.stringify(c));
-    let subtotal=0, frete=19.9, descontoPix=0, total=0;
-
-    function renderOrder(){
-      const list=document.getElementById('order-list');
-      const cart=getCart();
-      list.innerHTML='';
-      if(!cart.length){ list.innerHTML='<p>Seu carrinho está vazio 🐶</p>'; updateTotals(); return; }
-      subtotal=0;
-      cart.forEach(it=>{
-        const sub=(it.preco||0)*(it.quantidade||1); subtotal+=sub;
-        const row=document.createElement('div');
-        row.className='order-item';
-        row.innerHTML=`
-          <img src="${it.imagem||''}" alt="">
-          <div>
-            <div style="font-weight:700">${it.nome||''}</div>
-            <div>Qtd: ${it.quantidade||1}</div>
-          </div>
-          <div>${nf(sub)}</div>
-        `;
-        list.appendChild(row);
-      });
-      updateTotals();
-    }
-
-    function updateTotals(){
-      const pay=document.querySelector('input[name="pay"]:checked')?.value||'pix';
-      descontoPix = pay==='pix' ? 0.05 : 0;
-      const desc = subtotal * descontoPix;
-      const base = subtotal - desc;
-      total = base + frete;
-      document.getElementById('sum-sub').textContent = nf(subtotal);
-      document.getElementById('sum-frete').textContent = nf(frete);
-      document.getElementById('sum-total').textContent = nf(total);
-    }
-
-    function applyCupom(){
-      const code=document.getElementById('cupom').value.trim().toUpperCase();
-      if(!code) return;
-      if(code==='AUMIGO10'){
-        subtotal = Math.max(0, subtotal*0.9);
-        updateTotals();
-        document.getElementById('cupom').value='';
-        alert('Cupom aplicado: 10% de desconto!');
-      }else{
-        alert('Cupom inválido.');
-      }
-    }
-
-    function togglePayFields(){
-      const pay=document.querySelector('input[name="pay"]:checked')?.value;
-      const box=document.getElementById('card-fields');
-      box.style.display = pay==='card' ? 'block' : 'none';
-      document.getElementById('pay-warn').hidden = true;
-      updateTotals();
-    }
-
-    function validateAddress(){
-      const req=['f_nome','f_email','f_tel','f_cep','f_endereco','f_bairro','f_cidade','f_uf'];
-      let ok=true;
-      req.forEach(id=>{
-        const el=document.getElementById(id);
-        if(!el || !el.value.trim()) ok=false;
-      });
-      document.getElementById('addr-warn').hidden = ok;
-      return ok;
-    }
-
-    function validateCardIfNeeded(){
-      const pay=document.querySelector('input[name="pay"]:checked')?.value;
-      if(pay!=='card'){ document.getElementById('pay-warn').hidden=true; return true; }
-      const need=['cc_num','cc_val','cc_cvv','cc_name'];
-      let ok=true;
-      need.forEach(id=>{ const el=document.getElementById(id); if(!el || !el.value.trim()) ok=false; });
-      document.getElementById('pay-warn').hidden = ok;
-      return ok;
-    }
-
-    function finishOrder(){
-      const cart=getCart();
-      if(!cart.length){ alert('Seu carrinho está vazio!'); return; }
-      if(!validateAddress()) return;
-      if(!validateCardIfNeeded()) return;
-      const pedido={
-        itens:cart, subtotal, frete, descontoPix, total,
-        cliente:{
-          nome:document.getElementById('f_nome').value.trim(),
-          email:document.getElementById('f_email').value.trim(),
-          tel:document.getElementById('f_tel').value.trim(),
-          cep:document.getElementById('f_cep').value.trim(),
-          endereco:document.getElementById('f_endereco').value.trim(),
-          bairro:document.getElementById('f_bairro').value.trim(),
-          cidade:document.getElementById('f_cidade').value.trim(),
-          uf:document.getElementById('f_uf').value
-        },
-        pagamento:document.querySelector('input[name="pay"]:checked')?.value
-      };
-      localStorage.setItem('ultimo_pedido', JSON.stringify(pedido));
-      setCart([]);
-      window.location.href='sucesso.html';
-    }
-
-    document.addEventListener('DOMContentLoaded',()=>{
-      renderOrder();
-      document.querySelectorAll('input[name="frete"]').forEach(r=>{
-        r.addEventListener('change',()=>{ frete=parseFloat(r.value||'0')||0; updateTotals(); });
-      });
-      document.querySelectorAll('input[name="pay"]').forEach(r=>r.addEventListener('change',togglePayFields));
-      document.getElementById('btn-cupom').addEventListener('click',applyCupom);
-      document.getElementById('btn-finalizar').addEventListener('click',finishOrder);
-      togglePayFields();
-    });
-  </script>
   <script src="js/script.js" defer></script>
 </body>
+
 </html>
