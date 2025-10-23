@@ -72,24 +72,6 @@ nav a:hover {
   color: var(--success);
 }
 
-button,
-.btn {
-  background-color: var(--accent);
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: background .2s ease, transform .2s ease;
-  font-weight: 600;
-}
-
-button:hover,
-.btn:hover {
-  background-color: var(--accent-hover);
-  transform: translateY(-2px);
-}
-
 .search-bar {
   display: flex;
   justify-content: center;
@@ -122,49 +104,96 @@ button:hover,
   background-color: #e68a00;
 }
 
-.card {
-  background-color: #fff;
-  border: 1px solid #eee;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, .1);
-  padding: 15px;
-  text-align: center;
-  margin: 15px;
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  width: 220px;
-  transition: opacity .3s ease, transform .2s ease;
-}
+/*Inicio da pagina de produtos*/
 
-.card h2 {
-  font-family: 'Baloo 2', 'Fredoka One', cursive;
-  color: var(--brand-strong);
-  margin-bottom: 10px;
-}
-
-.card p {
-  margin-bottom: 10px;
+.h3-prod{/*titulo de cada parte dos produtos*/
+  font-size: 30px;
   color: var(--text);
+  margin: 40px 0 15px 10px;
+  font-family: 'Poppins', sans-serif;
 }
 
-.card a {
-  color: var(--success);
-  font-weight: 600;
-  text-decoration: none;
+.produtos-container{/*container com a rolagem horizontal*/
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 10px;
+  margin: 15px;
+  scroll-snap-type: x mandatory;
+  height: 500px;
 }
 
-.card a:hover {
-  text-decoration: underline;
+.produtos-container::-webkit-scrollbar{/*pseudo elemento que permite estilizar a barra de rolagem*/
+  height: 10px;
 }
 
-.card img {
-  width: 100%;
-  height: 150px;
+.produtos-container::-webkit-scrollbar-thumb{/*seleciona a parte em que o usuario arrasta*/
+  background-color: var(--accent);
+  border-radius: 13px;
+}
+
+.card{/*card dos produtos*/
+  flex: 0 0 auto;
+  width: 350px;
+  height: 450px;
+  background-color: var(--card-bg);
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  scroll-snap-align: start;
+  transition: transform 0.3s ease, box-shadow 0.3 ease;
+}
+
+.card:hover{
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.card img{/*imagem de cada card*/
+  width: 60%;
+  height: 200px;
+  padding: 20px;
   object-fit: cover;
-  border-radius: 6px;
-  margin-bottom: 10px;
+  border-radius: 15px 15px 0 0;
 }
+
+.card h3{/*titulo de cada card*/
+  font-size: 18px;
+  margin: 20px;
+  color: var(--text);
+  text-align: center;
+  min-height: 40px;
+  font-family: 'Poppins', 'Nunito', sans-serif;
+}
+
+.card p{
+  text-align: center;
+  font-size: 15px;
+  color: #555;
+  font-weight: bold;
+}
+
+button,
+.btn {/*botão dos cards*/
+  background-color: var(--accent);
+  color: #fff;
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background .2s ease, transform .2s ease;
+  font-weight: 600;
+}
+
+button:hover,
+.btn:hover {
+  background-color: var(--accent-hover);
+  transform: translateY(-2px);
+}
+
+/*Fim da pagina de produto*/
+
 
 .card[style*="display: none"] {
   opacity: 0;
@@ -177,18 +206,7 @@ button:hover,
   margin: 20px auto;
 }
 
-.produtos-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  align-items: stretch;
-  padding: 20px;
-  background: #e7e7e7;
-  border-radius: 10px;
-  margin: 35px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, .1);
-}
+
 
 .quantidade-container {
   display: flex;
