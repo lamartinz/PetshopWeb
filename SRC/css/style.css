@@ -125,7 +125,7 @@ nav a:hover {
 }
 
 .produtos-container::-webkit-scrollbar{/*pseudo elemento que permite estilizar a barra de rolagem*/
-  height: 10px;
+  height: 7px;
 }
 
 .produtos-container::-webkit-scrollbar-thumb{/*seleciona a parte em que o usuario arrasta*/
