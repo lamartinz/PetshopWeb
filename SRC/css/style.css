@@ -206,8 +206,6 @@ button:hover,
   margin: 20px auto;
 }
 
-
-
 .quantidade-container {
   display: flex;
   align-items: center;
@@ -332,6 +330,7 @@ button:hover,
   }
 }
 
+/*Bloco de beneficios do petshop*/
 .beneficios {
   text-align: center;
   padding: 36px 20px;
@@ -387,6 +386,7 @@ button:hover,
   color: #333;
   text-align: center;
 }
+/*Fim do bloco de beneficios do petshop*/
 
 @media (max-width:480px) {
   .beneficios-container>* {
@@ -394,6 +394,7 @@ button:hover,
     min-width: 0;
   }
 }
+
 
 .carrinho-container {
   display: flex;
@@ -874,6 +875,7 @@ form textarea {
   }
 }
 
+/*Inicio da pagina de checkout(confirmar pedido)*/
 .checkout-page {
   max-width: 1100px;
   margin: 16px auto;
@@ -1003,7 +1005,10 @@ form textarea {
     grid-template-columns: 1fr
   }
 }
+/*Fim da parte do checkout*/
 
+
+/*Inicio da pagina Sucesso*/
 .ok-wrap {
   max-width: 760px;
   margin: 40px auto;
@@ -1046,6 +1051,7 @@ form textarea {
   justify-content: center;
   flex-wrap: wrap
 }
+/*Fim da pagina Sucesso*/
 
 .site-header {
   background-color: #F2C94C;
@@ -1152,6 +1158,7 @@ form textarea {
   }
 }
 
+/*Carrossel da pagina Index*/
 .carousel {
   position: relative;
   max-width: 1100px;
@@ -1218,6 +1225,7 @@ form textarea {
   background: var(--accent);
   border-color: var(--accent)
 }
+/*Fim do carrossel da pagina Index*/
 
 .checkout-page {
   max-width: 1100px;
